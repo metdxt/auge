@@ -41,7 +41,9 @@ Alternatively, synchronize via the Cargo package manager:
 
 bash
 # Initiate synchronization sequence
-cargo install --git https://github.com/metdxt/auge
+cargo install auge
+# OR from git repo directly
+# cargo install --git https://github.com/metdxt/auge
 
 ```
 
