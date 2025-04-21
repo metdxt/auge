@@ -1,0 +1,43 @@
+[package]
+name = "auge"
+version = "0.1.0"
+edition = "2024"
+readme = "README.md"
+license = "MIT"
+authors = ["METDXT <metdxt@obj.su>"]
+keywords = ["cli", "image", "image-processing"]
+categories = ["command-line-utilities", "multimedia::images"]
+homepage = "https://github.com/metdxt/auge"
+repository = "https://github.com/metdxt/auge"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+image = { version = "0.25", features = [
+    "avif",
+    "bmp",
+    "dds",
+    "ff",
+    "gif",
+    "hdr",
+    "ico",
+    "jpeg",
+    "exr",
+    "png",
+    "pnm",
+    "qoi",
+    "tga",
+    "tiff",
+    "webp",
+] }
+imageproc = "0.25"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+thiserror = "2.0.12"
+viuer = "0.9"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "fat"
+strip = true
+panic = 'abort'
