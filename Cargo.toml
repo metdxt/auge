@@ -1,5 +1,6 @@
 [package]
 name = "auge"
+description = "a command-line apparatus for image manipulation"
 version = "0.1.0"
 edition = "2024"
 readme = "README.md"
