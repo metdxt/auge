@@ -6,7 +6,15 @@
 
 ## Capabilities
 
-*   **Reality Alteration Protocols:** A growing collection including Grayscale, Gaussian Blur, Dotart, Dynthres, Resize, Invert, and more yet to be uncovered.
+*   **Reality Alteration Protocols:** A complete collection of visual transformation algorithms:
+      - Grayscale: Convert to monochrome perception
+      - Gaussian Blur: Soften edges with radial diffusion
+      - Dotart: Render as stippled pointillism
+      - Dynthres: Dynamic threshold binarization
+      - Edge: Highlight perceptual boundaries
+      - Invert: Negative reality inversion
+      - Resize: Alter dimensional proportions
+      - Sepia: Apply antique temporal patina
 *   **Temporal Data Streams:** Reads from stdin and writes to stdout, enabling the chaining of alterations in sequence.
 *   **Interface Perception:** Automatically detects the terminal's display capabilities (iTerm/Kitty), reverting to a blocky representation if the necessary protocols aren't supported.
 *   **Format Spectrum:** Handles a wide range of input and output data formats.
@@ -37,14 +45,11 @@ Pre-compiled instances for Windows (x86_64) and Linux (x86_64, aarch64) await in
 
 Alternatively, synchronize via the Cargo package manager:
 
-```
-
-bash
+```bash
 # Initiate synchronization sequence
 cargo install auge
 # OR from git repo directly
 # cargo install --git https://github.com/metdxt/auge
-
 ```
 
 ## Operating Instructions
@@ -53,14 +58,11 @@ Once synchronized, consult the internal knowledge base via `auge --help` and `au
 
 ## Example Scenario: Altering a Visual Sequence
 
-```
-
-bash
+```bash
 # Input image undergoes grayscale transformation,
 # followed by Gaussian blur (strength 3),
 # finally materializing as output.png.
 auge -i input.png grayscale | auge g-blur -s 3 > output.png
-
 ```
 
 > The image's world line has been shifted. Chain other protocols similarly to achieve desired realities.
