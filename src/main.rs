@@ -120,7 +120,9 @@ enum Command {
     },
 
     #[command(about="Invert colors")]
-    Invert
+
+    #[command(about="Apply sepia tone filter")]
+    Sepia,
 }
 
 fn main() -> Result<(), AugeError> {

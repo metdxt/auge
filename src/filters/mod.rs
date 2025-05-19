@@ -4,10 +4,12 @@ pub mod grayscale;
 pub mod dotart;
 pub mod resize;
 pub mod invert;
+pub mod sepia;
 
 use dotart::DotartFilter;
 use image::{DynamicImage, Rgb};
 use invert::InvertFilter;
+use sepia::SepiaFilter;
 
 use crate::{Command, types::{AugeError, Color}};
 
@@ -59,6 +61,6 @@ pub fn filter_from_command(cmd: Command) -> Result<Box<dyn AugeFilter>, AugeErro
             color_mid: mid_color.unwrap_or(Color(Rgb::from([127u8; 3]))).0,
         })),
         Command::Resize { target , exact, filter} => Ok(Box::new(resize::ResizeFilter { target,  exact, filter: filter.into() })),
-        Command::Invert => Ok(Box::new(InvertFilter))
+        Command::Sepia => Ok(Box::new(SepiaFilter)),
     }
 }
