@@ -5,7 +5,11 @@ mod types;
 use std::io::{Read, stdin};
 
 use clap::{Parser, Subcommand};
-use filters::{FilterResult, filter_from_command};
+use filters::{
+    FilterResult,
+    blob_detect::{BlobBackground, BlobColorMode},
+    filter_from_command,
+};
 use image::ImageReader;
 
 use inout::print_image;
@@ -97,12 +101,12 @@ enum Command {
         )]
         upper_percentile: f32,
 
-        #[arg(long, short='d', help="Color to use for dark pixels")]
+        #[arg(long, short = 'd', help = "Color to use for dark pixels")]
         dark_color: Option<Color>,
-        #[arg(long, short='m', help="Color to use for midtone pixels")]
+        #[arg(long, short = 'm', help = "Color to use for midtone pixels")]
         mid_color: Option<Color>,
-        #[arg(long, short='b', help="Color to use for bright pixels")]
-        bright_color: Option<Color>
+        #[arg(long, short = 'b', help = "Color to use for bright pixels")]
+        bright_color: Option<Color>,
     },
 
     #[command(about = "Resize image")]
@@ -115,18 +119,55 @@ enum Command {
             help = "Resolution target, in relative, or absolute format. Example values: 1980x1080, x1080 (equivalent to autox1080), 1920x (equivalent to 1920xauto), 120%"
         )]
         target: ResizeInput,
-        #[arg(long, short, help="Filter to use for resizing", default_value="catmull-rom")]
-        filter: types::FilterType
+        #[arg(
+            long,
+            short,
+            help = "Filter to use for resizing",
+            default_value = "catmull-rom"
+        )]
+        filter: types::FilterType,
     },
 
-    #[command(about="Invert colors")]
+    #[command(about = "Invert colors")]
     Invert,
 
-    #[command(about="Apply sepia tone filter")]
+    #[command(about = "Apply sepia tone filter")]
     Sepia,
 
-    #[command(about="Apply edge detection filter")]
-    Edge
+    #[command(about = "Apply edge detection filter")]
+    Edge,
+
+    #[command(about = "Detect and colorize blobs of pixels")]
+    BlobDetect {
+        #[arg(
+            long,
+            short,
+            default_value = "10",
+            help = "Threshold (0-255). Pixels matching the target color within this threshold are considered part of the blob."
+        )]
+        threshold: u8,
+
+        #[arg(long, short, help = "Target color to detect blobs of.")]
+        color: Option<Color>,
+
+        #[arg(
+            long,
+            short,
+            value_enum,
+            default_value = "rainbow",
+            help = "Coloring strategy for blobs"
+        )]
+        mode: BlobColorMode,
+
+        #[arg(
+            long,
+            short = 'b',
+            value_enum,
+            default_value = "black",
+            help = "Background style"
+        )]
+        background: BlobBackground,
+    },
 }
 
 fn main() -> Result<(), AugeError> {

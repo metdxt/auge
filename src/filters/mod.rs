@@ -1,11 +1,12 @@
+pub mod blob_detect;
+pub mod dotart;
 pub mod dynthres;
+pub mod edge;
 pub mod gblur;
 pub mod grayscale;
-pub mod dotart;
-pub mod resize;
 pub mod invert;
+pub mod resize;
 pub mod sepia;
-pub mod edge;
 
 use dotart::DotartFilter;
 use edge::EdgeFilter;
@@ -13,7 +14,10 @@ use image::{DynamicImage, Rgb};
 use invert::InvertFilter;
 use sepia::SepiaFilter;
 
-use crate::{Command, types::{AugeError, Color}};
+use crate::{
+    Command,
+    types::{AugeError, Color},
+};
 
 pub enum FilterResult {
     Image(DynamicImage),
@@ -49,12 +53,21 @@ pub fn filter_from_command(cmd: Command) -> Result<Box<dyn AugeFilter>, AugeErro
             lower_percentile,
             upper_percentile,
             dot_color,
-            bg_color
-        } => Ok(Box::new(DotartFilter { output, scale, lower_percentile, upper_percentile, dot_color, bg_color })),
+            bg_color,
+        } => Ok(Box::new(DotartFilter {
+            output,
+            scale,
+            lower_percentile,
+            upper_percentile,
+            dot_color,
+            bg_color,
+        })),
         Command::Dynthres {
             lower_percentile,
             upper_percentile,
-            dark_color, mid_color, bright_color
+            dark_color,
+            mid_color,
+            bright_color,
         } => Ok(Box::new(dynthres::DynamicThresholdFilter {
             lower_percentile,
             upper_percentile,
@@ -62,9 +75,28 @@ pub fn filter_from_command(cmd: Command) -> Result<Box<dyn AugeFilter>, AugeErro
             color_white: bright_color.unwrap_or(Color(Rgb::from([255u8; 3]))).0,
             color_mid: mid_color.unwrap_or(Color(Rgb::from([127u8; 3]))).0,
         })),
-        Command::Resize { target , exact, filter} => Ok(Box::new(resize::ResizeFilter { target,  exact, filter: filter.into() })),
+        Command::Resize {
+            target,
+            exact,
+            filter,
+        } => Ok(Box::new(resize::ResizeFilter {
+            target,
+            exact,
+            filter: filter.into(),
+        })),
         Command::Invert => Ok(Box::new(InvertFilter)),
         Command::Sepia => Ok(Box::new(SepiaFilter)),
-        Command::Edge => Ok(Box::new(EdgeFilter))
+        Command::Edge => Ok(Box::new(EdgeFilter)),
+        Command::BlobDetect {
+            threshold,
+            mode,
+            background,
+            color,
+        } => Ok(Box::new(blob_detect::BlobDetectFilter {
+            threshold,
+            mode,
+            background,
+            target_color: color.map(|c| c.0),
+        })),
     }
 }
