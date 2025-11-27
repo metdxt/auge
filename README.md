@@ -34,18 +34,18 @@ Consult the internal knowledge base via `auge --help` or `auge <COMMAND> --help`
 
 Auge possesses a vast array of "Reality Alteration Protocols" (filters) to modify input data:
 
-| Incantation | Effect |
-|-------------|--------|
-| `view` | **Passive Observation.** Projects the image onto the terminal without alteration. |
-| `grayscale` | **Chromatic Drain.** Strips the image of color, leaving only luminance. |
-| `g-blur` | **Gaussian Diffusion.** Softens reality by blurring pixels (`-s` for strength). |
-| `dotart` | **Pointillist Reconstruction.** Renders the image as a matrix of dots. Customizable colors, thresholds, and can even output raw JSON data representing the dots. |
-| `dynthres` | **Luma Severance.** Dynamic thresholding to separate light from dark based on percentiles. |
-| `resize` | **Spatial Distortion.** Alters the dimensional proportions of the image (`target` resolution or %). |
-| `invert` | **Polarity Reversal.** Inverts the colors, creating a negative of the current reality. |
-| `sepia` | **Temporal Patina.** Applies an antique tone, simulating the passage of time. |
-| `edge` | **Boundary Revelation.** Highlights the edges where perceptions shift. |
-| `blob-detect` | **Entity Identification.** Detects and colors connected blobs of pixels based on color or luminance. |
+| Incantation | Effect | Example output |
+|-------------|--------|----------------|
+| `view` | **Passive Observation.** Projects the image onto the terminal without alteration. | ![](images/test.png) |
+| `grayscale` | **Chromatic Drain.** Strips the image of color, leaving only luminance. | ![](images/test_grayscale.png) |
+| `g-blur` | **Gaussian Diffusion.** Softens reality by blurring pixels (`-s` for strength). | ![](images/test_g_blur.png) |
+| `dotart` | **Pointillist Reconstruction.** Renders the image as a matrix of dots. Customizable colors, thresholds, and can even output raw JSON data representing the dots. | ![](images/test_dotart.png) |
+| `dynthres` | **Luma Severance.** Dynamic thresholding to separate light from dark based on percentiles. | ![](images/test_dynthres.png) |
+| `resize` | **Spatial Distortion.** Alters the dimensional proportions of the image (`target` resolution or %). | ![](images/test_resize.png) |
+| `invert` | **Polarity Reversal.** Inverts the colors, creating a negative of the current reality. | ![](images/test_invert.png) |
+| `sepia` | **Temporal Patina.** Applies an antique tone, simulating the passage of time. | ![](images/test_sepia.png) |
+| `edge` | **Boundary Revelation.** Highlights the edges where perceptions shift. | ![](images/test_edge.png) |
+| `blob-detect` | **Entity Identification.** Detects and colors connected blobs of pixels based on color or luminance. | ![](images/test_blob_detect.png) |
 
 ### Advanced Manipulation
 
