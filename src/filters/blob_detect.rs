@@ -199,7 +199,21 @@ impl BitboardTile {
                 // West (idx - 1) -> Right Shift 1.
                 let west = (flood & !COL_0_MASK) >> 1;
 
-                flood |= (north | south | east | west) & self.pixels_mask;
+                // Diagonals
+                let north_east = (flood & !COL_7_MASK) >> 7;
+                let north_west = (flood & !COL_0_MASK) >> 9;
+                let south_east = (flood & !COL_7_MASK) << 9;
+                let south_west = (flood & !COL_0_MASK) << 7;
+
+                flood |= (north
+                    | south
+                    | east
+                    | west
+                    | north_east
+                    | north_west
+                    | south_east
+                    | south_west)
+                    & self.pixels_mask;
 
                 stable = flood == old_flood;
             }
